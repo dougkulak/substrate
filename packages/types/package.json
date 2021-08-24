@@ -1,6 +1,6 @@
 {
   "name": "@dougkulak/substrate-types",
-  "version": "1.52.1",
+  "version": "0.0.0",
   "main": "target/es5/index.js",
   "source": "target/ts/index.ts",
   "types": "target/es5/index.d.ts",

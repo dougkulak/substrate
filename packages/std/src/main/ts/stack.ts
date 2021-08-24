@@ -60,7 +60,7 @@ export class Stack<T> implements IStack<T> {
   }
 
   toArray(): Array<any> {
-    return this._storage.map((x) => x);
+    return this._storage.map((x) => x)
   }
 
   clear(): void {
