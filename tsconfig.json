@@ -1,0 +1,13 @@
+{
+  "extends": "./packages/infra/tsconfig.compiler.json",
+  "compilerOptions": {
+    "baseUrl": "./packages",
+    "moduleResolution": "node",
+    "paths": {
+      "@dougkulak/substrate": ["./facade/src/main/ts"],
+      "@dougkulak/substrate-types": ["./types/src/main/ts"],
+      "@dougkulak/substrate-abstract": ["./abstract/src/main/ts"],
+      "@dougkulak/substrate-std": ["./std/src/main/ts"]
+    }
+  }
+}

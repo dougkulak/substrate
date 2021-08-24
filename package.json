@@ -1,0 +1,66 @@
+{
+  "name": "dougkulak-substrate-monorepo",
+  "workspaces": [
+    "packages/*"
+  ],
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "clean": "lerna clean --yes && lerna run clean && yarn clean:target && yarn clean:buildcache && yarn clean:docs",
+    "prebuild": "tsc -b packages/facade/tsconfig.json",
+    "clean:buildcache": "rm -rf packages/**/buildcache",
+    "clean:target": "rm -rf packages/**/target",
+    "clean:docs": "rm -rf packages/**/docs",
+    "build": "yarn clean && yarn prebuild && lerna run build --stream --concurrency 2 && yarn format",
+    "libdef": "yarn clean && lerna run --stream libdef",
+    "bootstrap": "lerna bootstrap",
+    "test": "lerna run test --stream --concurrency 2 && yarn lint && yarn format",
+    "jest": "jest",
+    "test:report": "yarn test && yarn coveralls:push",
+    "coveralls:push": "cat ./coverage/lcov.info | coveralls || exit 0",
+    "lint": "eslint 'packages/**/src/**/*.ts' --ignore-pattern 'packages/**/*.d.ts' --fix | snazzy",
+    "format": "prettier --write \"packages/**/src/**/*.ts\"",
+    "docs": "typedoc packages/**/src/main && touch ./docs/.nojekyll || exit 0",
+    "deps:upgrade": "npm_config_yes=true npx npm-upgrade-monorepo",
+    "postupdate": "yarn && yarn bootstrap && npm_config_yes=true npx yarn-audit-fix && yarn build && yarn test"
+  },
+  "prettier": "prettier-config-dougkulak",
+  "devDependencies": {
+    "coveralls": "3.1.1",
+    "eslint": "7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-dougkulak": "^1.0.0",
+    "esm": "3.2.25",
+    "find-git-root": "1.0.4",
+    "jest": "27.0.6",
+    "lerna": "4.0.0",
+    "lodash": "4.17.21",
+    "prettier": "^2.3.2",
+    "prettier-config-dougkulak": "^1.0.0",
+    "replace-in-file": "^6.2.0",
+    "snazzy": "9.0.0",
+    "typescript": "4.3.x",
+    "yargs": "17.1.1"
+  },
+  "resolutions": {
+    "npm-registry-client/**/dtslint": "^4.0.9"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "projects": [
+      "<rootDir>/packages/types/jest.config.json",
+      "<rootDir>/packages/abstract/jest.config.json",
+      "<rootDir>/packages/std/jest.config.json",
+      "<rootDir>/packages/facade/jest.config.json"
+    ]
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dougkulak/substrate.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/dougkulak/substrate/issues"
+  }
+}

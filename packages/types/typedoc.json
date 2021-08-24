@@ -1,0 +1,12 @@
+{
+  "name": "@dougkulak/substrate-types",
+  "out": "./docs",
+  "entryPoints": ["src/main/ts/index.ts"],
+  "exclude": ["test", "**/node_modules/**"],
+  "externalPattern": "**/node_modules/**",
+  "excludePrivate": false,
+  "hideGenerator": true,
+  "readme": "README.md",
+  "theme": "minimal",
+  "tsconfig": "./tsconfig.json"
+}
